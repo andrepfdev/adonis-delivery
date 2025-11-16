@@ -9,10 +9,10 @@ export default class AuthController {
         try {
             const data = request.only(['fullName', 'email', 'password'])
 
-            // Check if user already exists
+            // Checa se o usuário já existe
             const existingUser = await User.findBy('email', data.email)
             if (existingUser) {
-                return response.conflict({ message: 'User with this email already exists' })
+                return response.conflict({ message: 'E-mail do usuário já existe.' })
             }
 
             const user = await User.create(data)
@@ -21,7 +21,7 @@ export default class AuthController {
             const token = await User.accessTokens.create(user)
 
             return response.created({
-                message: 'User registered successfully',
+                message: 'Usuário registrado com sucesso',
                 user: {
                     id: user.id,
                     fullName: user.fullName,
@@ -33,7 +33,7 @@ export default class AuthController {
                 },
             })
         } catch (error) {
-            return response.badRequest({ message: 'Failed to register user', error: error.message })
+            return response.badRequest({ message: 'Falha no registro do usuário', error: error.message })
         }
     }
 
@@ -51,7 +51,7 @@ export default class AuthController {
             const token = await User.accessTokens.create(user)
 
             return response.ok({
-                message: 'Login successful',
+                message: 'Login com sucesso',
                 user: {
                     id: user.id,
                     fullName: user.fullName,
@@ -63,7 +63,7 @@ export default class AuthController {
                 },
             })
         } catch (error) {
-            return response.unauthorized({ message: 'Invalid credentials' })
+            return response.unauthorized({ message: 'Credenciais inválidas' })
         }
     }
 
@@ -79,9 +79,9 @@ export default class AuthController {
                 await User.accessTokens.delete(user, token.identifier)
             }
 
-            return response.ok({ message: 'Logout successful' })
+            return response.ok({ message: 'Logout com sucesso' })
         } catch (error) {
-            return response.internalServerError({ message: 'Failed to logout', error: error.message })
+            return response.internalServerError({ message: 'Falha no logout', error: error.message })
         }
     }
 
@@ -101,7 +101,7 @@ export default class AuthController {
                 },
             })
         } catch (error) {
-            return response.unauthorized({ message: 'Not authenticated' })
+            return response.unauthorized({ message: 'Não autenticado' })
         }
     }
 }
