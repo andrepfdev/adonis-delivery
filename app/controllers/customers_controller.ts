@@ -8,7 +8,7 @@ export default class CustomersController {
             const customers = await Customer.all()
             return response.ok({ data: customers })
         } catch (error) {
-            return response.internalServerError({ message: 'Failed to fetch customers', error: error.message })
+            return response.internalServerError({ message: 'Falha ao encontrar clientes', error: error.message })
         }
     }
 
@@ -17,12 +17,12 @@ export default class CustomersController {
             const customer = await Customer.find(params.id)
 
             if (!customer) {
-                return response.notFound({ message: 'Customer not found' })
+                return response.notFound({ message: 'Cliente não encontrado' })
             }
 
             return response.ok({ data: customer })
         } catch (error) {
-            return response.internalServerError({ message: 'Failed to fetch customer', error: error.message })
+            return response.internalServerError({ message: 'Falha ao encontrar cliente', error: error.message })
         }
     }
 
@@ -43,9 +43,9 @@ export default class CustomersController {
 
             const customer = await Customer.create(customerData)
 
-            return response.created({ message: 'Customer created successfully', data: customer })
+            return response.created({ message: 'Cliente criado com sucesso', data: customer })
         } catch (error) {
-            return response.badRequest({ message: 'Failed to create customer', error: error.message })
+            return response.badRequest({ message: 'Falha ao criar cliente', error: error.message })
         }
     }
 
@@ -54,7 +54,7 @@ export default class CustomersController {
             const customer = await Customer.find(params.id)
 
             if (!customer) {
-                return response.notFound({ message: 'Customer not found' })
+                return response.notFound({ message: 'Cliente não encontrado' })
             }
 
             const customerData = request.only([
@@ -73,9 +73,9 @@ export default class CustomersController {
             customer.merge(customerData)
             await customer.save()
 
-            return response.ok({ message: 'Customer updated successfully', data: customer })
+            return response.ok({ message: 'Cliente atualizado com sucesso', data: customer })
         } catch (error) {
-            return response.badRequest({ message: 'Failed to update customer', error: error.message })
+            return response.badRequest({ message: 'Falha ao atualizar cliente', error: error.message })
         }
     }
 
@@ -84,14 +84,14 @@ export default class CustomersController {
             const customer = await Customer.find(params.id)
 
             if (!customer) {
-                return response.notFound({ message: 'Customer not found' })
+                return response.notFound({ message: 'Cliente não encontrado' })
             }
 
             await customer.delete()
 
-            return response.ok({ message: 'Customer deleted successfully' })
+            return response.ok({ message: 'Cliente excluído com sucesso' })
         } catch (error) {
-            return response.internalServerError({ message: 'Failed to delete customer', error: error.message })
+            return response.internalServerError({ message: 'Falha ao excluir cliente', error: error.message })
         }
     }
 }

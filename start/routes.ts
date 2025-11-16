@@ -12,7 +12,7 @@ import { middleware } from './kernel.js'
 
 router.get('/', async () => {
   return {
-    hello: 'world',
+    'Meu primeiro projeto com AdonisJS!': 'Sucesso',
   }
 })
 

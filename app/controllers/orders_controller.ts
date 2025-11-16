@@ -23,6 +23,6 @@ export default class OrdersController {
         const orderId = params.id
         
         // Lógica para buscar um pedido pelo ID
-        return { message: 'Order details', orderId, user }
+        return { message: 'Detalher do pedido', orderId, user }
     }
 }
