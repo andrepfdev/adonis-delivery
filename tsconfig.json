@@ -1,0 +1,9 @@
+{
+  "extends": "@adonisjs/tsconfig/tsconfig.app.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build",
+    "noEmit": true,
+    "allowImportingTsExtensions": true //allowImportingTsExtensions serve para importar arquivos com extensão .ts
+  }
+}
